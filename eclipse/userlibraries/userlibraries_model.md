@@ -1,5 +1,5 @@
 ## Eclipse User library 文件模板 ##
-
+```XML
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 		<eclipse-userlibraries version="1.0"
 
@@ -16,3 +16,4 @@
 		</library>
 
 		</eclipse-userlibraries>
+```
