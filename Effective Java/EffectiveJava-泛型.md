@@ -91,5 +91,19 @@ class DelayQueue<E extends Delayed> implements BlockingQueue<E>;
 * 在设计新类型的时候，要确保它们不需要这种转换就可以使用。这通常意味这要把类型做成是泛型的。  
 * 只要时间允许，就把现有的类型都泛型化。
    
+## 优先考虑泛型方法 ##
+  
+同类一样，方法也可以泛型化。静态工具方法尤其适合于泛型化。  
+  
+```Java
+public static <E> Set<E> union(Set<E> s1, Set<E> s2) {
+	Set<E> result = nerw HashSet<E>(s1);
+	result.addAll(s2);
+	return result;
+}
+```  
+  
+声明类型参数的类型参数列表，处在方法的修饰符及其返回类型之间。  
+泛型方法有一个显著的特征是，无需明确指定类型参数的值，不像调用泛型构造器的时候是必须指定的。编译器通过检查方法参数的类型来计算类型参数的值。对于上述程序而言，编译器发现 *union* 的两个参数都是 *Set<String>* 类型，那么可以知道类型参数 *E* 必须为 *String* 。该过程称为**类型推导 (type inference)。**
   
 **来源于：Joshua Bloch 《Effective Java 中文版》**                                                    
