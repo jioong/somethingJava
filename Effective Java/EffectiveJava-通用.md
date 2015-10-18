@@ -29,4 +29,4 @@
   
 
 
-**来源于：Joshua Bloch 《Effective Java 中文版》**  
+**来源于：[Joshua Bloch 《Effective Java 中文版》](http://www.amazon.cn/Sun-%25E5%2585%25AC%25E5%258F%25B8%25E6%25A0%25B8%25E5%25BF%2583%25E6%258A%2580%25E6%259C%25AF%25E4%25B8%259B%25E4%25B9%25A6-Effective-Java%25E4%25B8%25AD%25E6%2596%2587%25E7%2589%2588-Joshua-Bloch/dp/B001PTGR52?SubscriptionId=AKIAJMGEVRIO53UGJCYQ&tag=16-28-282__-23&linkCode=sp1&camp=2025&creative=165953&creativeASIN=B001PTGR52 "Effective Java 中文版")**    
