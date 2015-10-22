@@ -15,8 +15,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<--也可以在 kind="src" 中直接指定源文件编译后的输出路径-->
+	<classpathentry kind="src" output="the/path/to/output" path="the/path/source/code"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/struts-2.3.24.1-all/struts-2.3.24.1/lib/commons-logging-1.1.3.jar"/>
+	<-- 下面为默认的输出路径，只能有一个默认输出路径 -->
 	<classpathentry kind="output" path="bin"/>
 </classpath>
 ```  
