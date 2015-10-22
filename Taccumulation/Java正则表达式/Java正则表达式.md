@@ -44,8 +44,73 @@
 	m.group(g) == s.substring(m.start(g), m.end(g));
 ```  
 可能抛出的异常与 *start(group)* 相同。  
-7. *groupCount()* 返回捕获组的数目。  】
+7. *groupCount()* 返回捕获组的数目。 
 ```Java 
 	public int groupCount();
 ```
-捕获组 0 表示整个匹配，不包括在该计数中。任何小于或等于该方法返回值的非负整数都被保证为该 *matcher* 的有效索引值。
+捕获组 0 表示整个匹配，不包括在该计数中。任何小于或等于该方法返回值的非负整数都被保证为该 *matcher* 的有效索引值。  
+  
+## Pattern.java ##
+  
+```Java
+public final class Pattern implements java.io.Serializable
+```  
+### 正则表达式修饰值 ###
+  
+1. `public static final int UNIX_LINES = 0x01;`  
+开启 *Unix* 行模式。在该模式只有 '\n' 终结符是被 ' . ^ $ ' 公认的行为。(?d)  
+```Java
+// 两个等效
+RegExp r1 = RegExp.compile("abd"), Pattern.I | Pattern.M);
+RegExp r2 = RegExp.compile("(?im)abc", 0);
+```   
+2. `public static final int CASE_INSENSITIVE = 0x02;`  
+启用大小写不敏感模式。(?!)   
+3. `public static final int COMMENTS = 0x04;`  
+在匹配模式中允许出现空格和注释。在该模式中，空格被忽略掉，内嵌的以 '#' 开头的注释会被忽略直到行尾。(?x)  
+4. `public static final int MULTILINE = 0x08;`  
+开启多行模式。在多行模式中， ** ^ $** 分别值匹配每行的开头和结尾。在默认情况下，则是会匹配整个输入字符串的开头和结尾。(?m)  
+5. `public static final int LITERAL = 0x10;`    
+开启文字模式解析。在该模式下，所有的元字符和转义序列会被认为是没有特殊意义。与其他修饰一起使用时，只有 *CASE_INSENSITIVE, UNICODE_CASE* 会影响匹配结果，其他的修饰都是多余的。  
+6. `public static final int DOTALL = 0x20;`  
+该模式下， '.' 可以匹配任意的字符，包括行结束符。(?s)  
+7. `public static final int UNICODE_CASE = 0x40;`  
+该模式下，不区分大小写匹配。(?u)  
+8. `public static final int CANON_EQ = 0x80;`  
+9. `public static final int UNICODE_CHARACTER_CLASS = 0x100;`  
+
+### 实例域 ###
+  
+1. `private String pattern` 原始的正则表达式模式字符串。  
+2. `orivate int flags` 原始的模式标记。  
+当序列化时，只有上述两个域会被保存。  
+3. `private transient volatile boolean compiled = false` 指示该 *Pattern* 是否被编译。  
+4. `private transient String normalizedPattern` 表示标准化的模式字符串。  
+5. `transient Node root` 是状态机开始查找操作的起点，可以允许起点在输入字符序列的任何地方。  
+6. `transient Node matchRoot` 查找操作对象树的根节点。匹配模式从其起点开始匹配。  
+7. `transient int[] buffer` 解析模式片的暂存。  
+8. `transient volatile Map<String, Integer> namedGroups` 将命名捕获组的名字映射到对应的捕获组 *id* 。  
+9. `transient GroupHead[] groupNodes` 解析组引用 (*group reference*) 时的暂存。  
+10. `private transient int[] temp` 模式编译用到的暂时空终结代码点数组。  
+11. `transient int capturingGroupCount` 表示该 *Pattern* 捕获组的数量。用于 *matchers* 去分配用于执行匹配的存储空间。  
+12. `transient int localCount` 用于解析树。  
+13. `private transient int cursor` *pattern* 字符串的索引，用于追踪多少字符已经被解析。  
+14. `private transient int patternLength` *pattern* 字符串的长度。  
+15. `private transient boolean hasSupplementary` 用于指示开始节点是否可能匹配到补充的字符序列。编译时设置为 *true* 的情况包括：如果 1）在 *pattern* 中有补充字符。 2）有完整的类或块的节点。  
+  
+### 构造函数 ###
+  
+
+  
+### 静态方法 ###
+  
+1. `public static Pattern compile(String regex)` 将给定的正则表达式编译成一个 *pattern* 。  、
+如果表达式有语法错误，则会抛出 *PatternSyntaxException* 异常。  
+2. `public static Pattern compile(String regex, int flags)` 以指定的标志编译正则表达式。 *flags* 就是正则表达式修饰值。可能抛出的异常有： *PatternSyntaxException ， IllegalArgumentException* 。  
+
+### 一般方法 ###
+  
+1. `public String pattern()` 返回该编译成该 *pattern* 的正则表达式。  
+2. `public String toString()` 同上。  
+3. `public int flags()` 返回 *pattern* 匹配的标志。  
+4. 
