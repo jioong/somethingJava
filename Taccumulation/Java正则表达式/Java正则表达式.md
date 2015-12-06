@@ -75,7 +75,20 @@
 	* 如果 `hitEnd` 为 `false`,且没有匹配被找到，跟多的输入 **不会找到一个匹配。**
 
   
+### 构造函数 ###
+  
+1. `Matcher(Pattern parent, CharSequence text)`
+	* *groups* 的最小 *size* 为 20 `2 * Math.max(parent.capturingGroupCount, 10)`。
+	* *locals* 的 *size*为 `parent.localCount`。  
+	* 设置匹配器 `matcher`的初始状态。  
+	*  
 ## Pattern.java ##
+  
+该类的实例表示一个编译过的正则表达式。一个正则表达式，也就是一个指定的字符串，必须首先编译成该类的一个实例。然后这个 *pattern* 就可以创造一个对象`Matcher`匹配器去匹配任意的字符序列。  
+所有的在涉及执行匹配的的状态信息都保存在匹配器中，因此**多个匹配器可以共享一个相同的pattern模式。**  
+  
+`Pattern` 是实例是不可变的，并且是多线程安全的。而 `Matcher`则不是多线程安全的。  
+`Pattern` 仅仅有两个序列化的组件，也就是**模式字符串** 和 **修饰值**，也就是反序列化时所需要用到的所有的用于重新编译该*pattern*的信息。
   
 ```Java
 public final class Pattern implements java.io.Serializable
