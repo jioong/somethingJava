@@ -138,7 +138,12 @@ RegExp r2 = RegExp.compile("(?im)abc", 0);
   
 ### 构造函数 ###
   
+1. `compile(String regex)` 实际调用 `Pattern(regex, 0)`。  
 
+
+### 重点方法 ###
+  
+1. `compile()`
   
 ### 静态方法 ###
   
@@ -151,4 +156,4 @@ RegExp r2 = RegExp.compile("(?im)abc", 0);
 1. `public String pattern()` 返回该编译成该 *pattern* 的正则表达式。  
 2. `public String toString()` 同上。  
 3. `public int flags()` 返回 *pattern* 匹配的标志。  
-4. 
+
